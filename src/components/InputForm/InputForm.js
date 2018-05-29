@@ -6,7 +6,7 @@ class InputForm extends Component {
     this.state = {
       roomsize:'x5y5',
       hoovercoord: 'x3y3',
-      dustone: 'x1y1'
+      dustone: 'x2y2'
     };
 
     this.handleRoomSize = this.handleRoomSize.bind(this);
@@ -37,11 +37,13 @@ class InputForm extends Component {
     let dustCoord = this.state.dustone;
     let roomSize = this.state.roomsize;
     this.props.setCoord(hooverCoord, dustCoord, roomSize);
+    this.props.roomDisplay();
     event.preventDefault();
   }
 
   render() {
     return (
+      <div style={{display:this.props.inputform}}>
       <form className={"hoover-coord-form"} onSubmit={this.handleSubmit}>
         
         <label>
@@ -61,6 +63,7 @@ class InputForm extends Component {
         <br/>
         <input type="submit" value="Submit" />
       </form>
+      </div>
     );
   }
 }

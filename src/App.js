@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import InputForm from './components/InputForm';
-import Board from './components/Board';
-import Controls from './components/Controls';
-import Coord from './components/Coord';
+import InputForm from './components/InputForm/InputForm';
+import Board from './components/Board/Board';
+import Controls from './components/Controls/Controls';
+import Coord from './components/Coord/Coord';
 
 class App extends Component {
   state = {
@@ -13,7 +13,9 @@ class App extends Component {
     dx: '',
     dy: '',
     tx: '',
-    ty: ''
+    ty: '',
+    roomdisplay:'none',
+    inputform:'block'
   }
 
   onClickUp = (event) => {
@@ -63,12 +65,12 @@ class App extends Component {
 
   setCoord = (h, d, t) => {
     //console.log("x:",x);
-    let coordX = Number(h.substr(1, 1));
-    let coordY = Number(h.substr(3, 1));
-    let dcoordX = Number(d.substr(1, 1));
-    let dcoordY = Number(d.substr(3, 1));
-    let tcoordX = Number(t.substr(1, 1));
-    let tcoordY = Number(t.substr(3, 1));
+    const coordX = Number(h.substr(1, 1));
+    const coordY = Number(h.substr(3, 1));
+    const dcoordX = Number(d.substr(1, 1));
+    const dcoordY = Number(d.substr(3, 1));
+    const tcoordX = Number(t.substr(1, 1));
+    const tcoordY = Number(t.substr(3, 1));
     console.log('dust is here:', d);
     console.log("this is x, y:", coordX, coordY, typeof (coordX));
     console.log('table dimension:', tcoordX, tcoordY);
@@ -78,9 +80,12 @@ class App extends Component {
 
   onClearDust = () => {
     console.log('dust is clear');
-    this.setState({ dx: null, dy: null });
+    this.setState({ dx: '', dy: '' });
   }
 
+ handleRoomStatus = ()=>{
+this.setState({roomdisplay:'flex', inputform:'none'})
+ }
 
   render() {
     return (
@@ -90,8 +95,12 @@ class App extends Component {
           <h1 className="App-title">This is Hoover...</h1>
         </header>
 
-        <InputForm setCoord={this.setCoord} />
-        <div className={"board-controls"}>
+        <InputForm 
+        setCoord={this.setCoord} 
+        roomDisplay={this.handleRoomStatus}
+        inputform={this.state.inputform}/>
+
+        <div className={"board-controls"} style={{display:this.state.roomdisplay}}>
           <div className={"whole-board"}>
             {/* <div className={"y-axis"}>
               <div>4</div>

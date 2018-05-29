@@ -32,9 +32,9 @@ h1, p {
 }
 
 .board-controls {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
-  margin: auto;
+  margin: 20px auto;
   /* height: 700px;
   width: 920px; */
   flex-direction: row;
@@ -151,7 +151,7 @@ cursor: pointer;
 }
 
 .hoover-coord-form {
-width: 300px;
+width: 70%;
 margin: 20px auto 20px auto;
 background-color: skyblue;
 padding: 10px;
