@@ -19,11 +19,6 @@ props.cellClassName===props.hooverCoord ? hooverCellBg = '#87ceeb' : hooverCellB
   if (props.dustCell === true) {
     cellStyle.backgroundColor = 'red';
   }
-
-  if (props.dustCoord === props.hooverCoord) {
-    props.clearDust ();
-    console.log('delete dust');
-  }
   
   return (
     <div className = {props.cellClassName} style = {cellStyle}>

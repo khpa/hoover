@@ -3,34 +3,39 @@ import Cell from './Cell';
 
 const board = (props) => {
 
-let cells = [];
-let cellsNames = [];
-let dustCellStatus = false;
-for (let i=0;i<5;i++){
-  for (let j=0;j<5;j++){
-    // console.log(i, j);
-    let cName = "x"+j+"y"+i;
-    cName===props.dustCoord?dustCellStatus=true:dustCellStatus=false;
-    cellsNames.push(cName);
-  cells.push(<Cell 
-    key = {cName} 
-    dustCell = {dustCellStatus} 
-    cellClassName={cName} 
-    hooverCoord={props.hooverCoord} 
-    dustCoord={props.dustCoord}
-    clearDust = {props.clearDust}/>)
+  let cells = [];
+  let cellsNames = [];
+  let dustCellStatus = false;
+  //xtable & ytable from state
+  let xtable = props.xTable;
+  let ytable = props.yTable;
+
+  let tablewidth = xtable * 100 + (xtable * 2);
+  for (let i = 0; i < ytable; i++) {
+    for (let j = 0; j < xtable; j++) {
+      //i=y j=x
+      // console.log(i, j);
+      let cName = "x" + j + "y" + i;
+      cName === props.dustCoord ? dustCellStatus = true : dustCellStatus = false;
+      cellsNames.push(cName);
+      cells.push(<Cell
+        key={cName}
+        dustCell={dustCellStatus}
+        cellClassName={cName}
+        hooverCoord={props.hooverCoord}
+        dustCoord={props.dustCoord}
+         />)
+    }
   }
-  }
- 
+
   return (
     <div style={{
       border: "1px solid red",
-      width: "510px",
-      height: "510px",
+      width: tablewidth,
       display: "flex",
-      flexFlow:"row wrap-reverse"
+      flexFlow: "row wrap-reverse"
     }}>
-    {cells}
+      {cells}
     </div>
   )
 };
