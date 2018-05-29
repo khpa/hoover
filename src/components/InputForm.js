@@ -4,8 +4,8 @@ class InputForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 'A3',
-      dust: 0
+      hoovercoord: 'x3y3',
+      dustone: 'x1y1'
     };
 
     this.handleChangeCoord = this.handleChangeCoord.bind(this);
@@ -14,32 +14,39 @@ class InputForm extends Component {
   }
 
   handleChangeCoord(event) {
-    this.setState({ value: event.target.value });
+    //check coord range
+    this.setState({ hoovercoord: event.target.value });
   }
 
   handleChangeDust(event) {
-    this.setState({ dust: event.target.value });
+    //check coord range
+
+    console.log(event.target.value);
+    this.setState({ dustone: event.target.value });
   }
 
   handleSubmit(event) {
-    alert('coord are: ' + this.state.value + 'numb of dust cells'+ this.state.dust);
+    // alert('coord are: ' + this.state.value + 'numb of dust cells'+ this.state.dust);
+    let coord = this.state.hoovercoord;
+    let dustCoord = this.state.dustone;
+    this.props.setHooverCoord(coord, dustCoord);
     event.preventDefault();
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className={"hoover-coord-form"} onSubmit={this.handleSubmit}>
+        
         <label>
-          START COORD FOR ROBOT
-          choose from (A-E & 1-5 e.g. A3)
-          <input type="text" value={this.state.value} onChange={this.handleChangeCoord} />
-        </label>
-        <br/>
-        <label>
-        HOW MANY DUST CELLS? (0-25)
-        <input type="text" value={this.state.dust} onChange={this.handleChangeDust} />
+        COORD FOR DUST CELLS? (e.g. x2y2)
+        FIRST <input type="text" value={this.state.dustone} onChange={this.handleChangeDust} />
         <br/>
         </label>
+        <label>
+          START COORD FOR ROBOT (e.g. x3y3)
+          <input type="text" value={this.state.hoovercoord} onChange={this.handleChangeCoord} />
+        </label>
+        <br/>
         <input type="submit" value="Submit" />
       </form>
     );

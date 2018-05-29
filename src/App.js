@@ -8,8 +8,10 @@ import Coord from './components/Coord';
 
 class App extends Component {
   state = {
-    x:3,
-    y:3
+    x:5,
+    y:5,
+    dx:null,
+    dy:null
   }
 
   onClickUp = (event)=>{
@@ -41,6 +43,22 @@ class App extends Component {
     newX.x>=0?this.setState(newX):console.log('outside table');
   }
 
+  setHooverCoord = (h,d)=>{
+    //console.log("x:",x);
+    let coordX = Number(h.substr(1,1));
+    let coordY = Number(h.substr(3,1));
+    let dcoordX = Number(d.substr(1,1));
+    let dcoordY = Number(d.substr(3,1));
+    console.log('dust is here:', d);
+    console.log("this is x, y:", coordX, coordY, typeof(coordX));
+    this.setState({x:coordX,y:coordY, dx:dcoordX, dy:dcoordY})
+  }
+
+  onClearDust = ()=>{
+console.log ('dust is clear');
+this.setState({dx:null, dy:null});
+  }
+
   render() {
     return (
       <div className="App">
@@ -49,7 +67,7 @@ class App extends Component {
           <h1 className="App-title">This is Hoover...</h1>
         </header>
         
-        <InputForm />
+        <InputForm  setHooverCoord={this.setHooverCoord}/>
         <div className={"board-controls"}>
           <div className={"whole-board"}>
             <div className={"y-axis"}>
@@ -60,7 +78,10 @@ class App extends Component {
               <div>Y 0</div>
             </div>
             
-            <Board hooverCoord = {"x"+this.state.x+"y"+this.state.y}/>
+            <Board 
+            hooverCoord = {"x"+this.state.x+"y"+this.state.y} 
+            dustCoord={"x"+this.state.dx+"y"+this.state.dy}
+            clearDust={this.onClearDust}/>
             
             <div className={"x-axis"}>
               <div>X 0</div>

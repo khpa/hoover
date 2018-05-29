@@ -34,6 +34,7 @@ h1, p {
 .board-controls {
   border: 1px solid red;
   display: flex;
+  margin: auto;
   height: 700px;
   width: 920px;
   flex-direction: row;
@@ -143,4 +144,23 @@ cursor: pointer;
 .myButton:active {
 	position:relative;
 	top:1px;
+}
+
+.coord-label {
+  margin-left: 20px;
+}
+
+.hoover-coord-form {
+width: 300px;
+margin: 20px auto 20px auto;
+background-color: skyblue;
+padding: 10px;
+border-radius: 10px;
+-moz-box-shadow: 3px 4px 0px 0px #2d80a2;
+-webkit-box-shadow: 3px 4px 0px 0px #2d80a2;
+box-shadow: 3px 4px 0px 0px #2d80a2;
+}
+
+.hoover-coord-form input {
+  margin: 10px;
 }

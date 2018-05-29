@@ -2,7 +2,7 @@ import React from 'react';
 
 const coord = (props)=>{
     return(
-        <div>
+        <div className="coord-label">
         Hoover's Coord: {props.coord}
         </div>    
     )

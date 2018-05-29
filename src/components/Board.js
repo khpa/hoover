@@ -5,12 +5,20 @@ const board = (props) => {
 
 let cells = [];
 let cellsNames = [];
+let dustCellStatus = false;
 for (let i=0;i<5;i++){
   for (let j=0;j<5;j++){
     // console.log(i, j);
     let cName = "x"+j+"y"+i;
+    cName===props.dustCoord?dustCellStatus=true:dustCellStatus=false;
     cellsNames.push(cName);
-  cells.push(<Cell key = {cName} cellClassName={cName} hooverCoord={props.hooverCoord}/>)
+  cells.push(<Cell 
+    key = {cName} 
+    dustCell = {dustCellStatus} 
+    cellClassName={cName} 
+    hooverCoord={props.hooverCoord} 
+    dustCoord={props.dustCoord}
+    clearDust = {props.clearDust}/>)
   }
   }
  
