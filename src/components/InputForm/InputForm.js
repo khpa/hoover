@@ -5,13 +5,17 @@ class InputForm extends Component {
     super(props);
     this.state = {
       roomsize:'x5y5',
-      hoovercoord: 'x3y3',
-      dustone: 'x2y2'
+      hoovercoord: 'x2y1',
+      dustone: 'x1y1',
+      dusttwo:'x2y2',
+      dustthree:'x3y3'
     };
 
     this.handleRoomSize = this.handleRoomSize.bind(this);
     this.handleHooverCoord = this.handleHooverCoord.bind(this);
-    this.handleChangeDust = this.handleChangeDust.bind(this);
+    this.handleDustOne = this.handleDustOne.bind(this);
+    this.handleDustTwo = this.handleDustTwo.bind(this);
+    this.handleDustThree = this.handleDustThree.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -24,17 +28,25 @@ class InputForm extends Component {
     this.setState({ hoovercoord: event.target.value });
   }
 
-  handleChangeDust(event) {
+  handleDustOne(event) {
     //check coord range
-
     console.log(event.target.value);
     this.setState({ dustone: event.target.value });
+  }
+
+  handleDustTwo(event) {
+    //check coord range
+    this.setState({ dusttwo: event.target.value });
+  }
+  handleDustThree(event) {
+    //check coord range
+    this.setState({ dustthree: event.target.value });
   }
 
   handleSubmit(event) {
     // alert('coord are: ' + this.state.value + 'numb of dust cells'+ this.state.dust);
     let hooverCoord = this.state.hoovercoord;
-    let dustCoord = this.state.dustone;
+    let dustCoord = [this.state.dustone, this.state.dusttwo,this.state.dustthree];
     let roomSize = this.state.roomsize;
     this.props.setCoord(hooverCoord, dustCoord, roomSize);
     this.props.roomDisplay();
@@ -52,8 +64,10 @@ class InputForm extends Component {
         <br/>
         </label>
         <label>
-        COORD FOR DUST CELLS? (e.g. x2y2)
-        FIRST <input type="text" value={this.state.dustone} onChange={this.handleChangeDust} />
+        COORD FOR DUST CELLS? (e.g. x2y2)<br/>
+        FIRST <input type="text" value={this.state.dustone} onChange={this.handleDustOne} />
+        SECOND <input type="text" value={this.state.dusttwo} onChange={this.handleDustTwo} />
+        THIRD <input type="text" value={this.state.dustthree} onChange={this.handleDustThree} />
         <br/>
         </label>
         <label>

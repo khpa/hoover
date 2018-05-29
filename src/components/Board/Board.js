@@ -16,7 +16,8 @@ const board = (props) => {
       //i=y j=x
       // console.log(i, j);
       let cName = "x" + j + "y" + i;
-      cName === props.dustCoord ? dustCellStatus = true : dustCellStatus = false;
+      console.log(props.dustCoord.toString());
+      props.dustCoord.toString().includes(cName) ? dustCellStatus = true : dustCellStatus = false;
       cellsNames.push(cName);
       cells.push(<Cell
         key={cName}

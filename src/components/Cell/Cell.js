@@ -16,17 +16,17 @@ props.cellClassName===props.hooverCoord ? hooverCellBg = '#87ceeb' : hooverCellB
   }
   
   
-  if (props.dustCell === true) {
+  if (props.dustCell) {
     cellStyle.backgroundColor = 'red';
   }
   
   return (
     <div className = {props.cellClassName} style = {cellStyle}>
-    Cell: {props.cellClassName}
-    <br/>
-    {props.hooverCoord}<br/>
+    {/* Cell: {props.cellClassName}
+    <br/> */}
+    {/* {props.hooverCoord}<br/>
     {props.dustCoord}<br/>
-    {props.dustCell.toString()}
+    {props.dustCell.toString()} */}
   
     </div>
   )

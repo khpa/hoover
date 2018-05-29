@@ -14,8 +14,9 @@ class App extends Component {
     dy: '',
     tx: '',
     ty: '',
-    roomdisplay:'none',
-    inputform:'block'
+    dustcoord:'',
+    roomdisplay: 'none',
+    inputform: 'block'
   }
 
   onClickUp = (event) => {
@@ -24,9 +25,9 @@ class App extends Component {
     const yTemp = this.state.y;
     const newY = { ...this.state, y: yTemp + 1 };
     newY.y < this.state.ty ? this.setState(newY) : console.log('outside table');
-    if (this.state.x === this.state.dx && this.state.y + 1 === this.state.dy) {
-      console.log("hoover over dust!!")
-      this.onClearDust();
+    let checkDust = "x"+(this.state.x).toString()+"y"+(this.state.y+1).toString();
+    if (this.state.dustcoord.includes(checkDust)) {
+      this.onClearDust(checkDust);
     }
   }
   onClickDown = (event) => {
@@ -35,9 +36,10 @@ class App extends Component {
     const yTemp = this.state.y;
     const newY = { ...this.state, y: yTemp - 1 };
     newY.y >= 0 ? this.setState(newY) : console.log('outside table');
-    if (this.state.x === this.state.dx && this.state.y - 1 === this.state.dy) {
+    let checkDust = "x"+(this.state.x).toString()+"y"+(this.state.y-1).toString();
+    if (this.state.dustcoord.includes(checkDust)) {
       console.log("hoover over dust!!")
-      this.onClearDust();
+      this.onClearDust(checkDust);
     }
   }
   onClickRight = (event) => {
@@ -46,9 +48,10 @@ class App extends Component {
     const xTemp = this.state.x;
     const newX = { ...this.state, x: xTemp + 1 };
     newX.x < this.state.tx ? this.setState(newX) : console.log('outside table');
-    if (this.state.x + 1 === this.state.dx && this.state.y === this.state.dy) {
+    let checkDust = "x"+(this.state.x +1).toString()+"y"+(this.state.y).toString();
+    if (this.state.dustcoord.includes(checkDust)) {
       console.log("hoover over dust!!");
-      this.onClearDust();
+      this.onClearDust(checkDust);
     }
   }
   onClickLeft = (event) => {
@@ -57,35 +60,39 @@ class App extends Component {
     const xTemp = this.state.x;
     const newX = { ...this.state, x: xTemp - 1 };
     newX.x >= 0 ? this.setState(newX) : console.log('outside table');
-    if (this.state.x - 1 === this.state.dx && this.state.y === this.state.dy) {
+    let checkDust = "x"+(this.state.x -1).toString()+"y"+(this.state.y).toString();
+    console.log(checkDust);
+    if (this.state.dustcoord.includes(checkDust)) {
       console.log("hoover over dust!!")
-      this.onClearDust();
+      this.onClearDust(checkDust);
     }
   }
 
   setCoord = (h, d, t) => {
-    //console.log("x:",x);
+  
     const coordX = Number(h.substr(1, 1));
     const coordY = Number(h.substr(3, 1));
-    const dcoordX = Number(d.substr(1, 1));
-    const dcoordY = Number(d.substr(3, 1));
+    // const dcoordX = Number(d[0].substr(1, 1));
+    // const dcoordY = Number(d[0].substr(3, 1));
     const tcoordX = Number(t.substr(1, 1));
     const tcoordY = Number(t.substr(3, 1));
-    console.log('dust is here:', d);
-    console.log("this is x, y:", coordX, coordY, typeof (coordX));
-    console.log('table dimension:', tcoordX, tcoordY);
-    this.setState({ x: coordX, y: coordY, dx: dcoordX, dy: dcoordY, tx: tcoordX, ty: tcoordY })
+
+    this.setState({ x: coordX, y: coordY, tx: tcoordX, ty: tcoordY, dustcoord:d})
   }
 
 
-  onClearDust = () => {
+  onClearDust = (dust) => {
     console.log('dust is clear');
-    this.setState({ dx: '', dy: '' });
+    let newDust = this.state.dustcoord.filter((e)=>e!==dust)
+    console.log ("new dust:",newDust);
+   this.setState({dustcoord:newDust});
+    //this.setState({...this.state,dustcoord:newDust});
+    // this.setState({ dx: '', dy: '', dustcoord:'' });
   }
 
- handleRoomStatus = ()=>{
-this.setState({roomdisplay:'flex', inputform:'none'})
- }
+  handleRoomStatus = () => {
+    this.setState({ roomdisplay: 'flex', inputform: 'none' })
+  }
 
   render() {
     return (
@@ -95,12 +102,12 @@ this.setState({roomdisplay:'flex', inputform:'none'})
           <h1 className="App-title">This is Hoover...</h1>
         </header>
 
-        <InputForm 
-        setCoord={this.setCoord} 
-        roomDisplay={this.handleRoomStatus}
-        inputform={this.state.inputform}/>
+        <InputForm
+          setCoord={this.setCoord}
+          roomDisplay={this.handleRoomStatus}
+          inputform={this.state.inputform} />
 
-        <div className={"board-controls"} style={{display:this.state.roomdisplay}}>
+        <div className={"board-controls"} style={{ display: this.state.roomdisplay }}>
           <div className={"whole-board"}>
             {/* <div className={"y-axis"}>
               <div>4</div>
@@ -112,7 +119,9 @@ this.setState({roomdisplay:'flex', inputform:'none'})
 
             <Board
               hooverCoord={"x" + this.state.x + "y" + this.state.y}
-              dustCoord={"x" + this.state.dx + "y" + this.state.dy}
+
+              dustCoord={this.state.dustcoord}
+              //dustCoord={"x" + this.state.dx + "y" + this.state.dy}
               xTable={this.state.tx}
               yTable={this.state.ty} />
 
