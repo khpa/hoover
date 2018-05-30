@@ -22,12 +22,6 @@ props.cellClassName===props.hooverCoord ? hooverCellBg = '#87ceeb' : hooverCellB
   
   return (
     <div className = {props.cellClassName} style = {cellStyle}>
-    {/* Cell: {props.cellClassName}
-    <br/> */}
-    {/* {props.hooverCoord}<br/>
-    {props.dustCoord}<br/>
-    {props.dustCell.toString()} */}
-  
     </div>
   )
 }

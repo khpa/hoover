@@ -59,7 +59,7 @@ class InputForm extends Component {
       <form className={"hoover-coord-form"} onSubmit={this.handleSubmit}>
         
         <label>
-        ROOM SIZE? (e.g. x5y5)
+        ROOM SIZE? (e.g. x5y5 [max size x9y9])
        <input type="text" value={this.state.roomsize} onChange={this.handleRoomSize} />
         <br/>
         </label>

@@ -6,17 +6,14 @@ const board = (props) => {
   let cells = [];
   let cellsNames = [];
   let dustCellStatus = false;
-  //xtable & ytable from state
-  let xtable = props.xTable;
-  let ytable = props.yTable;
+  const {xTable,yTable}=props;
 
-  let tablewidth = xtable * 100 + (xtable * 2);
-  for (let i = 0; i < ytable; i++) {
-    for (let j = 0; j < xtable; j++) {
-      //i=y j=x
-      // console.log(i, j);
+  const tableWidth = xTable * 100 + (xTable * 2);
+  for (let i = 0; i < yTable; i++) {
+    for (let j = 0; j < xTable; j++) {
+      
       let cName = "x" + j + "y" + i;
-      console.log(props.dustCoord.toString());
+
       props.dustCoord.toString().includes(cName) ? dustCellStatus = true : dustCellStatus = false;
       cellsNames.push(cName);
       cells.push(<Cell
@@ -31,8 +28,8 @@ const board = (props) => {
 
   return (
     <div style={{
-      border: "1px solid red",
-      width: tablewidth,
+      border: "2px solid black",
+      width: tableWidth,
       display: "flex",
       flexFlow: "row wrap-reverse"
     }}>
