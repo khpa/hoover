@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import "./App.css";
 import InputForm from "./components/InputForm/InputForm";
 import Board from "./components/Board/Board";
 import Controls from "./components/Controls/Controls";
 import Coord from "./components/Coord/Coord";
-import DustCount from './components/DustCount/DustCount';
+import DustCount from "./components/DustCount/DustCount";
 
 class App extends Component {
   state = {
@@ -16,10 +16,10 @@ class App extends Component {
     ty: "",
     dustcoord: "",
     roomdisplay: "none",
-    inputform: "block", 
-    moves:0
+    inputform: "block",
+    moves: 0
   };
-  
+
   setCoord = (h, d, t) => {
     const coordX = Number(h.substr(1, 1));
     const coordY = Number(h.substr(3, 1));
@@ -61,12 +61,15 @@ class App extends Component {
             />
 
             <Coord coord={"X:" + this.state.x + " Y:" + this.state.y} />
-            <DustCount dustCounter = {3-this.state.dustcoord.length} moves={this.state.moves}/>
+            <DustCount
+              dustCounter={3 - this.state.dustcoord.length}
+              moves={this.state.moves}
+            />
           </div>
 
           <Controls
             onMove={(stepX, stepY) =>
-              this.setState(state => {
+              this.setState((state) => {
                 const newX = state.x + stepX;
                 const newY = state.y + stepY;
                 const x = state.tx > newX && newX > -1 ? newX : state.x;
@@ -76,7 +79,7 @@ class App extends Component {
                 return {
                   x,
                   y,
-                  dustCoord, 
+                  dustCoord,
                   moves
                 };
               })
@@ -93,7 +96,6 @@ const cleanCell = (dustArr, cell) => {
     const pos = dustArr.indexOf(cell);
     if (pos > -1) {
       dustArr.splice(pos, 1);
-      
     }
   }
   return dustArr;
