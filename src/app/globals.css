@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+:root {
+  --cabinet: #c41e3a;
+  --cabinet-deep: #8e1028;
+  --cabinet-shine: #e23a55;
+  --brass: #d4a54a;
+  --brass-dark: #8a641c;
+  --navy: #1b1f3b;
+  --navy-deep: #101328;
+  --lcd: #c6f4d6;
+  --rug: #9be0c4;
+  --lcd-ink: #1a3a32;
+  --fluff: #7a4e8c;
+  --fluff-light: #c49ad4;
+  --hoover: #f6f1ea;
+  --wood: #3a2a22;
+}
+
+@theme inline {
+  --color-cabinet: var(--cabinet);
+  --color-cabinet-deep: var(--cabinet-deep);
+  --color-cabinet-shine: var(--cabinet-shine);
+  --color-brass: var(--brass);
+  --color-brass-dark: var(--brass-dark);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-lcd: var(--lcd);
+  --color-rug: var(--rug);
+  --color-lcd-ink: var(--lcd-ink);
+  --color-fluff: var(--fluff);
+  --color-fluff-light: var(--fluff-light);
+  --color-hoover: var(--hoover);
+  --color-wood: var(--wood);
+  --font-display: var(--font-bungee);
+  --font-score: var(--font-chivo);
+  --font-sans: var(--font-figtree);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--navy-deep);
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(196, 30, 58, 0.35), transparent 55%),
+    radial-gradient(800px 400px at 80% 110%, rgba(212, 165, 74, 0.12), transparent 50%),
+    var(--navy-deep);
+  color: var(--lcd);
+  font-family: var(--font-figtree), sans-serif;
+}
+
+button,
+a {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+}
+
+@keyframes cabinet-boot {
+  from {
+    opacity: 0.35;
+    transform: translateY(18px) scale(0.98);
+    filter: saturate(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes bump-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes puff {
+  from {
+    transform: scale(0.4);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes star-slam {
+  from {
+    transform: scale(0.2) rotate(-12deg);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes battery-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.battery-low {
+  animation: battery-pulse 900ms ease-in-out infinite;
+}
+
+.boot-in {
+  animation: cabinet-boot 700ms ease-out both;
+}
+
+.bumping .lcd-screen {
+  animation: bump-shake 180ms ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-in,
+  .bumping .lcd-screen,
+  .puff,
+  .star-slam,
+  .battery-low {
+    animation: none;
+  }
+}
